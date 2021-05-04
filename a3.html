@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf8">
+        <title>ajax</title>
+
+        <script 
+            src="https://code.jquery.com/jquery-3.6.0.min.js" 
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
+            crossorigin="anonymous">
+        </script>
+
+        <style></style>
+    </head>
+    <body>
+        <p>Sex:</p> 
+        <input type="radio" name="sex" id="man" value="man">Man</input><br/>
+        <input type="radio" name="sex" id="woman" value="woman">Woman</input><br/>
+        Height=<input type="range" step="1" min="130" max="200" id="height"></input><br/>
+        <input type="button" value="Send" onclick="dataSend()">
+
+        <div id="result"></div>
+
+        <script>
+            function dataSend() {
+                let $height = $("#height").val();
+                let $sex = $("input[name=sex]:checked").val();
+
+                console.log($sex);
+                
+                $.ajax({
+                    type: "POST",
+                    url: "a3.php",
+                    data: "sex="+$sex+"&height="+$height,
+                    success: function(data){
+                        $("#result").html(data);
+                    }
+                });
+            }
+        </script>
+    </body>
+</html>
